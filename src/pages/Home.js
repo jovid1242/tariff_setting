@@ -7,13 +7,15 @@ import http from "../http";
 import "../styles/home.scss";
 
 export default function Home() {
-  const [minutes, setMinutes] = useState();
-  const [sms, setSms] = useState();
-  const [enternet, setEnternet] = useState();
-
   const arrNumMinut = [100, 200, 300, 600];
   const arrNumSms = [0, 50, 100, 150];
   const arrNumEnternet = [5, 10, 15, 25];
+
+  const [minutes, setMinutes] = useState(arrNumMinut[0]);
+  const [sms, setSms] = useState(arrNumSms[0]);
+  const [enternet, setEnternet] = useState(arrNumEnternet[0]);
+
+  console.log(minutes, "dddd");
 
   return (
     <div className="cell_section">
@@ -27,10 +29,8 @@ export default function Home() {
               <p>на другие мобильные номера домашнего региона</p>
             </div>
             <RangeSlider
-              min={0}
-              max={600}
-              from={0}
-              to={100}
+              min={arrNumMinut[0]}
+              max={arrNumMinut[arrNumMinut.length - 1]}
               step={100}
               values={arrNumMinut}
               postfix={"Мин"}
@@ -42,10 +42,8 @@ export default function Home() {
               <h2 className="info_title">Смс</h2>
             </div>
             <RangeSlider
-              min={0}
-              max={600}
-              from={0}
-              to={100}
+              min={arrNumSms[0]}
+              max={arrNumSms[arrNumSms.length - 1]}
               step={100}
               values={arrNumSms}
               postfix={" "}
@@ -57,10 +55,8 @@ export default function Home() {
               <h2 className="info_title">Интернет</h2>
             </div>
             <RangeSlider
-              min={0}
-              max={600}
-              from={0}
-              to={100}
+              min={arrNumEnternet[0]}
+              max={arrNumEnternet[arrNumEnternet.length - 1]}
               step={100}
               values={arrNumEnternet}
               postfix={"Гб"}

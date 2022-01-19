@@ -3,8 +3,6 @@ import IonRangeSlider from "react-ion-slider";
 export default function RangeSlider({
   min,
   max,
-  from,
-  to,
   step,
   values,
   postfix,
@@ -14,15 +12,15 @@ export default function RangeSlider({
     <>
       <IonRangeSlider
         type="single"
+        skin="flat"
         min={min}
         max={max}
-        from={from}
-        to={to}
         step={step}
         values={values}
         grid={true}
         grid_num={4}
         grid_snap={false}
+        drag_interval={false}
         keyboard={true}
         postfix={postfix}
         onChange={(e) => onChange(e.from_value)}
