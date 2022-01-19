@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import "../../styles/social.scss";
 
 export default function Social({ change }) {
-  const [activeTab, setactiveTab] = useState("");
+  const [activeTab, setactiveTab] = useState([""]);
+
+  const removeActive = (e) => {
+    const findActive = activeTab.filter((item) => item !== e);
+    setactiveTab(findActive);
+  };
 
   const handleClick = (e) => {
-    setactiveTab(e);
-    change(20);
+    const findActive = activeTab.find((item) => item === e);
+    if (!findActive) {
+      setactiveTab((prev) => [...prev, e]);
+    } else {
+      removeActive(e);
+    }
+    change(activeTab.length + 1);
   };
 
   const arrSocial = ["facebook", "instagram", "whatsapp", "telegram"];
@@ -18,7 +28,9 @@ export default function Social({ change }) {
           {arrSocial?.map((el, i) => {
             return (
               <li
-                className={activeTab === el ? "activeTab" : ""}
+                className={
+                  activeTab.find((item) => item === el) ? "activeTab" : ""
+                }
                 onClick={() => handleClick(el)}
                 key={i}
               >

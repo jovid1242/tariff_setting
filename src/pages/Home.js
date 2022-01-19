@@ -43,10 +43,6 @@ export default function Home() {
     sendForm(social, "social");
   }, [social]);
 
-  // useEffect(() => {
-  //   setAllSum(minutes * 10 + sms * 15 + enternet + 25 + social);
-  // }, [minutes, sms, enternet, social]);
-
   return (
     <div className="cell_section">
       <div className="container">
