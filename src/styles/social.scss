@@ -1,0 +1,25 @@
+.social ul {
+  width: 100%;
+  display: flex;
+
+  li {
+    width: 45px;
+    height: 45px;
+    background: #41414199;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background: #000;
+    }
+  }
+  .activeTab {
+    background: #000;
+    cursor: auto;
+  }
+}
