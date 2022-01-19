@@ -6,7 +6,7 @@ export default function Social({ change }) {
 
   const handleClick = (e) => {
     setactiveTab(e);
-    change(e);
+    change(20);
   };
 
   const arrSocial = ["facebook", "instagram", "whatsapp", "telegram"];

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RangeSlider from "../components/rangeSlider/RangeSlider";
 import Social from "../components/social/Social";
-
 import http from "../http";
-
 import "../styles/home.scss";
 
 export default function Home() {
@@ -14,24 +12,40 @@ export default function Home() {
   const [minutes, setMinutes] = useState(arrNumMinut[0]);
   const [sms, setSms] = useState(arrNumSms[0]);
   const [enternet, setEnternet] = useState(arrNumEnternet[0]);
+  const [social, setSocial] = useState(0);
 
   const [allSum, setAllSum] = useState(0);
 
+  const sendForm = (arg, type) => {
+    http
+      .post("/tariff_settings", { type: type, count: arg })
+      .then((res) => {
+        setAllSum(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
-    setAllSum((prev) => prev + minutes * 10);
+    sendForm(minutes, "minute");
   }, [minutes]);
 
   useEffect(() => {
-    setAllSum((prev) => prev + sms * 15);
+    sendForm(sms, "sms");
   }, [sms]);
 
   useEffect(() => {
-    setAllSum((prev) => prev + enternet * 40);
+    sendForm(enternet, "enternet");
   }, [enternet]);
 
-  const handleSocial = (e) => {
-    setAllSum((prev) => prev + 20);
-  };
+  useEffect(() => {
+    sendForm(social, "social");
+  }, [social]);
+
+  // useEffect(() => {
+  //   setAllSum(minutes * 10 + sms * 15 + enternet + 25 + social);
+  // }, [minutes, sms, enternet, social]);
 
   return (
     <div className="cell_section">
@@ -83,7 +97,7 @@ export default function Home() {
             <div className="info">
               <h2 className="info_title">Соцсети</h2>
             </div>
-            <Social change={handleSocial} />
+            <Social change={setSocial} />
           </div>
         </div>
 
