@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "../../styles/social.scss";
 
-export default function Social() {
+export default function Social({ change }) {
   const [activeTab, setactiveTab] = useState("");
 
   const handleClick = (e) => {
     setactiveTab(e);
+    change(e);
   };
 
   const arrSocial = ["facebook", "instagram", "whatsapp", "telegram"];
+
   return (
     <div>
       <div className="social">

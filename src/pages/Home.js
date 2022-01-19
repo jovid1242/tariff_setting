@@ -15,7 +15,23 @@ export default function Home() {
   const [sms, setSms] = useState(arrNumSms[0]);
   const [enternet, setEnternet] = useState(arrNumEnternet[0]);
 
-  console.log(minutes, "dddd");
+  const [allSum, setAllSum] = useState(0);
+
+  useEffect(() => {
+    setAllSum((prev) => prev + minutes * 10);
+  }, [minutes]);
+
+  useEffect(() => {
+    setAllSum((prev) => prev + sms * 15);
+  }, [sms]);
+
+  useEffect(() => {
+    setAllSum((prev) => prev + enternet * 40);
+  }, [enternet]);
+
+  const handleSocial = (e) => {
+    setAllSum((prev) => prev + 20);
+  };
 
   return (
     <div className="cell_section">
@@ -67,12 +83,12 @@ export default function Home() {
             <div className="info">
               <h2 className="info_title">Соцсети</h2>
             </div>
-            <Social />
+            <Social change={handleSocial} />
           </div>
         </div>
 
         <div className="result">
-          <span>480 руб/месяц</span>
+          <span>{allSum} руб/месяц</span>
         </div>
       </div>
     </div>
