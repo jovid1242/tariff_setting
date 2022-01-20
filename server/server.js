@@ -6,7 +6,7 @@ const port = 8000;
 app.use(cors());
 app.use(express.json());
 
-const arr = [
+const arrTariff = [
   { name: "minute", count: 0, price: 2 },
   { name: "sms", count: 0, price: 1 },
   { name: "enternet", count: 0, price: 25 },
@@ -14,12 +14,12 @@ const arr = [
 ];
 
 app.post("/api/tariff_settings", (req, res) => {
-  arr.forEach((el) => {
+  arrTariff.forEach((el) => {
     if (req.body.type === el.name) {
       el.count = req.body.count;
     }
   });
-  let sum = arr.reduce((a, b) => {
+  let sum = arrTariff.reduce((a, b) => {
     return a + b["price"] * b["count"];
   }, 0);
   res.json({ data: sum });

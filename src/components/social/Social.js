@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/social.scss";
 
 export default function Social({ change }) {
-  const [activeTab, setactiveTab] = useState([""]);
+  const [activeTab, setactiveTab] = useState([]);
 
-  const removeActive = (e) => {
-    const findActive = activeTab.filter((item) => item !== e);
+  const removeActive = (element) => {
+    const findActive = activeTab.filter((item) => item !== element);
     setactiveTab(findActive);
   };
 
-  const handleClick = (e) => {
-    const findActive = activeTab.find((item) => item === e);
+  const handleClick = (element) => {
+    const findActive = activeTab.find((item) => item === element);
     if (!findActive) {
-      setactiveTab((prev) => [...prev, e]);
+      setactiveTab((prev) => [...prev, element]);
     } else {
-      removeActive(e);
+      removeActive(element);
     }
-    change(activeTab.length + 1);
   };
+
+  useEffect(() => {
+    change(activeTab.length + 1);
+  }, [activeTab]);
 
   const arrSocial = ["facebook", "instagram", "whatsapp", "telegram"];
 

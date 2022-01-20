@@ -16,9 +16,9 @@ export default function Home() {
 
   const [allSum, setAllSum] = useState(0);
 
-  const sendForm = (arg, type) => {
+  const sendForm = (count, type) => {
     http
-      .post("/tariff_settings", { type: type, count: arg })
+      .post("/tariff_settings", { type, count })
       .then((res) => {
         setAllSum(res.data.data);
       })
